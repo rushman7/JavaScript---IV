@@ -42,38 +42,41 @@ class Humanoid extends CharacterStats {
   greet() {
     return `${this.name} offers a greeting in ${this.language}`;
   }
+
+  attack(char) {
+    if (char.healthPoints <= 0) {
+      return `${char.name}'s HP fell below 0. They are dead.`
+    } else {
+      char.healthPoints = char.healthPoints - 7
+      
+      if (char.healthPoints <= 0) {
+        return `${char.name}'s HP fell below 0. They are dead.`
+      } else {
+        return `${char.name}'s HP is now ${char.healthPoints}`
+      }
+    }
+  }
 }
 
-// function Villain(villainAttrs) {
-//   Humanoid.call(this, villainAttrs);
-// }
+class Villain extends Humanoid {
+  constructor(villainAttrs) {
+    super(villainAttrs)
+  }
 
-// Villain.prototype = Object.create(Humanoid.prototype);
-// Villain.prototype.shout = function() {
-//   return `${this.name}: FOR THE HORDE!`
-// }
-// Villain.prototype.attack = function(char) {
-//   if (char.healthPoints <= 0) {
-//     return `${char.name}'s HP fell below 0. They are dead.`
-//   } else {
-//     char.healthPoints = char.healthPoints - 7
-    
-//     if (char.healthPoints <= 0) {
-//       return `${char.name}'s HP fell below 0. They are dead.`
-//     } else {
-//       return `${char.name}'s HP is now ${char.healthPoints}`
-//     }
-//   }
-// }
+  shout() {
+    return `${this.name}: FOR THE HORDE!`
+  }
+}  
 
-// function Hero(heroAttrs) {
-//   Villain.call(this, heroAttrs);
-// }
+class Hero extends Humanoid {
+  constructor(heroAttrs) {
+    super(heroAttrs)
+  }
 
-// Hero.prototype = Object.create(Villain.prototype);
-// Hero.prototype.shout = function() {
-//   return `${this.name}: FOR THE ALLIANCE!`
-// }
+  shout() {
+    return `${this.name}: FOR THE ALLIANCE!`
+  }
+}
 
 // -----------------------------------------------------------------------------------------------------------------
 // Created Objects and console.log's
@@ -139,20 +142,20 @@ console.log(archer.greet()); // Lilith offers a greeting in Elvish.
 console.log(mage.takeDamage()); // Bruce took damage.
 console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
-// const villain = new Villain({
-//   healthPoints: 21,
-//   name: 'Thrall'
-// });
+const villain = new Villain({
+  healthPoints: 21,
+  name: 'Thrall'
+});
 
-// const hero = new Hero({
-//   healthPoints: 16,
-//   name: 'Anduin'
-// });
+const hero = new Hero({
+  healthPoints: 16,
+  name: 'Anduin'
+});
 
-// console.log(villain.shout());
-// console.log(hero.shout());
-// console.log(villain.attack(hero));
-// console.log(hero.attack(villain));
-// console.log(villain.attack(hero));
-// console.log(hero.attack(villain));
-// console.log(villain.attack(hero));
+console.log(villain.shout());
+console.log(hero.shout());
+console.log(villain.attack(hero));
+console.log(hero.attack(villain));
+console.log(villain.attack(hero));
+console.log(hero.attack(villain));
+console.log(villain.attack(hero));
