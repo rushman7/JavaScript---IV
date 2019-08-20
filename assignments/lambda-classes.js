@@ -38,7 +38,7 @@ class Student extends Person {
   }
 
   listsSubjects() {
-    this.student.map((subject) => subject.favSubjects)
+    return this.favSubjects.map((item) => item)
   }
 
   PRAssignment(subject) {
@@ -50,3 +50,24 @@ class Student extends Person {
   }
 }
 
+const josh = new Instructor({
+  name: 'Josh',
+  location: 'Ohio',
+  age: 37,
+  favLanguage: 'JavaScript',
+  specialty: 'Front-end',
+  catchPhrase: `Don't forget the homies`
+});
+
+const thomas = new Student({
+  name: 'Thomas',
+  location: 'California',
+  age: 31,
+  previousBackground: 'Hospitality',
+  className: 'CS11',
+  favSubjects: ['Html', 'CSS', 'JavaScript']
+});
+
+console.log(josh.demo('React'));
+console.log(josh.grade(thomas, 'React'))
+console.log(thomas.listsSubjects())
