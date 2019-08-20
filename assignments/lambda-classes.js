@@ -1,10 +1,10 @@
 // CODE here for your Lambda Classes
 
 class Person {
-  constructor(personAttrs) {
-    this.name = personAttrs.name;
-    this.age = personAttrs.age;
-    this.location = personAttrs.location;
+  constructor(char) {
+    this.name = char.name;
+    this.age = char.age;
+    this.location = char.location;
   }
 
   speak() {
@@ -13,11 +13,11 @@ class Person {
 }
 
 class Instructor extends Person {
-  constructor(instAttrs) {
-    super(instAttrs)
-    this.specialty = instAttrs.specialty;
-    this.favLanguage = instAttrs.favLanguage;
-    this.catchPhrase = instAttrs.catchPhrase;
+  constructor(char) {
+    super(char)
+    this.specialty = char.specialty;
+    this.favLanguage = char.favLanguage;
+    this.catchPhrase = char.catchPhrase;
   }
 
   demo(subject) {
@@ -30,11 +30,11 @@ class Instructor extends Person {
 }
 
 class Student extends Person {
-  constructor(studentAttrs) {
-    super(studentAttrs)
-    this.previousBackground = studentAttrs.previousBackground;
-    this.className = studentAttrs.className;
-    this.favSubjects = studentAttrs.favSubjects;
+  constructor(char) {
+    super(char)
+    this.previousBackground = char.previousBackground;
+    this.className = char.className;
+    this.favSubjects = char.favSubjects;
   }
 
   listsSubjects() {
@@ -46,7 +46,23 @@ class Student extends Person {
   }
 
   sprintChallenge(sprint) {
-    return `${this.name} has begun sprint challenge on ${subject}.`
+    return `${this.name} has begun sprint challenge on ${sprint}.`
+  }
+}
+
+class ProjectManager extends Instructor {
+  constructor(char) {
+    super(char)
+    this.gradClassName = char.gradClassName;
+    this.favInstructor = char.favInstructor;
+  }
+
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standy times!`
+  }
+
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`
   }
 }
 
@@ -68,6 +84,15 @@ const thomas = new Student({
   favSubjects: ['Html', 'CSS', 'JavaScript']
 });
 
+const arthur = new ProjectManager({
+  name: 'Arthur',
+  location: 'New York',
+  age: 25,
+  gradClassName: 'CS11',
+  favInstructor: 'Josh Knell'
+});
+
 console.log(josh.demo('React'));
-console.log(josh.grade(thomas, 'React'))
-console.log(thomas.listsSubjects())
+console.log(josh.grade(thomas, 'React'));
+console.log(thomas.listsSubjects());
+console.log(arthur.debugsCode(thomas, 'React'));
