@@ -27,6 +27,11 @@ class Instructor extends Person {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}.`
   }
+
+  points(grade) {
+    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+    return grade + plusOrMinus * 6
+  }
 }
 
 class Student extends Person {
@@ -35,6 +40,7 @@ class Student extends Person {
     this.previousBackground = char.previousBackground;
     this.className = char.className;
     this.favSubjects = char.favSubjects;
+    this.grade = char.grade;
   }
 
   listsSubjects() {
@@ -81,7 +87,8 @@ const thomas = new Student({
   age: 31,
   previousBackground: 'Hospitality',
   className: 'CS11',
-  favSubjects: ['Html', 'CSS', 'JavaScript']
+  favSubjects: ['Html', 'CSS', 'JavaScript'],
+  grade: 90
 });
 
 const arthur = new ProjectManager({
@@ -96,3 +103,5 @@ console.log(josh.demo('React'));
 console.log(josh.grade(thomas, 'React'));
 console.log(thomas.listsSubjects());
 console.log(arthur.debugsCode(thomas, 'React'));
+console.log(thomas.grade);
+console.log(arthur.points(thomas.grade))
